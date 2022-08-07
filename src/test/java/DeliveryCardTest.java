@@ -1,5 +1,6 @@
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -17,11 +18,12 @@ public class DeliveryCardTest {
     @Test
     void shouldCorrectFillingForm() {
 
-        String meetingDate = inputDate(3);
+        String meetingDate = inputDate(7);
 
         open("http://localhost:9999/");
         $("[data-test-id=\"city\"] input").setValue("Волгоград");
-        $x("//input[@placeholder='Дата встречи']").setValue("meetingDate");
+        $x("//input[@placeholder='Дата встречи']").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+        $x("//input[@placeholder='Дата встречи']").setValue(meetingDate);
         $("[data-test-id=\"name\"] input").setValue("Петров-Водкин Евгений");
         $("[data-test-id=\"phone\"] input").setValue("+79645813332");
         $("[data-test-id=\"agreement\"]").click();
